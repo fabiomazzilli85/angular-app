@@ -1,0 +1,88 @@
+<div *ngIf="posts && posts.length > 0" class="container mx-auto my-8 px-4">
+    <!-- Titolo della sezione -->
+    <h2 class="text-3xl font-bold mb-8 text-center text-gray-800">Posts:</h2>
+  
+    <!-- Form per aggiungere un nuovo post -->
+    <form
+      (submit)="addPost($event)"
+      class="flex flex-col gap-4 max-w-xl mx-auto border border-gray-300 p-6 rounded-lg shadow-md bg-white"
+    >
+      <input
+        type="text"
+        name="title"
+        placeholder="Title"
+        [(ngModel)]="newPost.title"
+        required
+        class="p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+      />
+      <textarea
+        name="body"
+        placeholder="Body"
+        [(ngModel)]="newPost.body"
+        required
+        rows="4"
+        class="p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+      ></textarea>
+      <button
+        type="submit"
+        class="bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-lg transition"
+      >
+        Add Post
+      </button>
+    </form>
+  
+    <!-- Lista dei post -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
+      <div
+        *ngFor="let post of posts"
+        class="flex flex-col justify-between border border-gray-200 rounded-lg shadow-md p-6 bg-white hover:shadow-lg transition hover:bg-gray-50"
+      >
+        <!-- Titolo e corpo del post -->
+        <div>
+          <h3 class="text-xl font-semibold text-gray-800 mb-2">{{ post.title }}</h3>
+          <p class="text-gray-700 text-sm leading-relaxed">{{ post.body }}</p>
+        </div>
+  
+        <!-- Bottoni: commenti e cancellazione -->
+        <div class="flex justify-between items-center mt-4">
+          <button
+            class="flex items-center gap-2 text-green-600 hover:text-green-700 transition"
+            (click)="toggleComments(post)"
+          >
+            <i class="fa-regular fa-comment"></i>
+            {{ post.showComments ? 'Hide Comments' : 'Show Comments' }}
+          </button>
+          <button
+            class="flex items-center gap-2 text-red-600 hover:text-red-700 transition"
+            (click)="deletePost(post.id)"
+          >
+            <i class="fa-solid fa-trash"></i> Delete
+          </button>
+        </div>
+  
+        <!-- Commenti -->
+        <div *ngIf="post.showComments && post.comments" class="mt-4">
+          <h4 class="text-lg font-semibold text-gray-800 mb-3">Comments:</h4>
+          <ul class="space-y-2">
+            <li
+              *ngFor="let comment of post.comments"
+              class="bg-gray-100 p-4 rounded-lg border border-gray-200"
+            >
+              <strong class="text-gray-900">{{ comment.name }}</strong>
+              <p class="text-gray-700">{{ comment.body }}</p>
+              <span class="text-sm text-gray-500">By: {{ comment.email }}</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Messaggio di errore -->
+  <div
+    *ngIf="error"
+    class="container mx-auto my-8 px-4 py-6 bg-red-100 text-red-600 rounded-lg border border-red-600 text-center"
+  >
+    {{ error }}
+  </div>
+  

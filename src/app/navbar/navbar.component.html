@@ -1,0 +1,46 @@
+<nav class="bg-amber-400 flex flex-wrap justify-between items-center p-4 shadow-md">
+    <!-- Navigation Links -->
+    <ul class="flex gap-4 md:gap-6">
+      <li>
+        <a class="hover:underline underline-offset-8 " href="#">
+          <i class="fa-solid fa-house mr-2"></i>Home
+        </a>
+      </li>
+      <li>
+        <a class="hover:underline underline-offset-8 hidden md:block" routerLink="users">
+          <i class="fa-solid fa-users mr-2"></i>Users
+        </a>
+      </li>
+      <li>
+        <a class="hover:underline underline-offset-8 hidden md:block" routerLink="posts">
+          <i class="fa-regular fa-envelope mr-2"></i>Posts
+        </a>
+      </li>
+      <li>
+        <a class="hover:underline underline-offset-8 hidden md:block" routerLink="album">
+          <i class="fa-solid fa-image mr-2"></i>Album
+        </a>
+      </li>
+      <li>
+        <a class="hover:underline underline-offset-8 hidden md:block" routerLink="todos">
+          <i class="fa-regular fa-square-check mr-2"></i>Todos
+        </a>
+      </li>
+    </ul>
+  
+    <!-- Search Bar -->
+    <div class="flex gap-2 items-center mt-4 md:mt-0">
+      <input
+        type="text"
+        class="rounded-lg px-4 py-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-slate-500"
+        placeholder="Search users by email"
+      />
+      <button
+        type="submit"
+        class="bg-slate-950 hover:bg-slate-900 text-white px-4 py-2 rounded-lg transition duration-300"
+      >
+        Search
+      </button>
+    </div>
+  </nav>
+  

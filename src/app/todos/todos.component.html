@@ -1,0 +1,42 @@
+<div *ngIf="todos && todos.length > 0" class="container mx-auto my-8 px-4">
+    <!-- Titolo della sezione -->
+    <h2 class="text-3xl font-bold mb-8 text-center text-gray-900">Todos:</h2>
+  
+    <!-- Lista dei Todos -->
+    <ul class="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <li
+        *ngFor="let todo of todos"
+        class="flex flex-col p-6 border border-gray-300 rounded-lg shadow-md bg-white hover:bg-gray-50 transition duration-300"
+      >
+        <!-- Checkbox e Titolo -->
+        <div class="flex items-center gap-4 flex-grow">
+          <input
+            type="checkbox"
+            (change)="toggleTitle(todo)"
+            class="h-5 w-5 accent-blue-600"
+            [checked]="todo.completed"
+          />
+          <strong
+            class="text-lg font-semibold text-gray-800"
+            [class.line-through]="todo.completed"
+          >
+            {{ todo.title }}
+          </strong>
+        </div>
+  
+        <!-- User ID -->
+        <p class="text-sm text-gray-500 mt-2">
+          User ID: <span class="font-medium text-gray-700">{{ todo.userId }}</span>
+        </p>
+      </li>
+    </ul>
+  </div>
+  
+  <!-- Messaggio di errore -->
+  <div
+    *ngIf="error"
+    class="container mx-auto my-8 px-4 py-4 bg-red-100 text-red-600 rounded-lg border border-red-600"
+  >
+    <p class="text-center font-medium">{{ error }}</p>
+  </div>
+  

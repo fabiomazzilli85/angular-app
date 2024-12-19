@@ -1,0 +1,62 @@
+<div *ngIf="users && users.length > 0" class="container mx-auto my-8 px-4">
+    <!-- Titolo della sezione -->
+    <h2 class="text-3xl font-bold mb-8 text-center text-gray-900">Users:</h2>
+  
+    <!-- Lista Utenti -->
+    <ul class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <li
+        *ngFor="let user of users"
+        class="p-6 border border-gray-300 rounded-lg shadow-md bg-white hover:bg-gray-50 transition"
+      >
+        <!-- Nome e Informazioni Utente -->
+        <strong class="text-xl font-semibold text-gray-800 block mb-2">
+          {{ user.name }}
+        </strong>
+        <p class="text-gray-700"><span class="font-medium">Username:</span> {{ user.username }}</p>
+        <p class="text-gray-700"><span class="font-medium">Email:</span> {{ user.email }}</p>
+  
+        <!-- Azioni -->
+        <div class="flex gap-4 mt-4">
+          <button
+            (click)="toggleAlbums(user)"
+            class="text-blue-600 hover:text-blue-800 underline transition"
+          >
+            {{ user.showAlbums ? 'Hide Albums' : 'Show Albums' }}
+          </button>
+          <button
+            (click)="togglePosts(user)"
+            class="text-blue-600 hover:text-blue-800 underline transition"
+          >
+            {{ user.showPosts ? 'Hide Posts' : 'Show Posts' }}
+          </button>
+        </div>
+  
+        <!-- Sezione Album -->
+        <div *ngIf="user.showAlbums && user.albums" class="mt-4">
+          <h3 class="text-lg font-semibold text-gray-900">Albums:</h3>
+          <ul class="list-disc list-inside text-gray-700">
+            <li *ngFor="let album of user.albums">{{ album.title }}</li>
+          </ul>
+        </div>
+  
+        <!-- Sezione Posts -->
+        <div *ngIf="user.showPosts && user.posts" class="mt-4">
+          <h3 class="text-lg font-semibold text-gray-900">Posts:</h3>
+          <ul class="list-disc list-inside text-gray-700">
+            <li *ngFor="let post of user.posts">
+              <strong>{{ post.title }}</strong>: {{ post.body }}
+            </li>
+          </ul>
+        </div>
+      </li>
+    </ul>
+  </div>
+  
+  <!-- Messaggio di Errore -->
+  <div
+    *ngIf="error"
+    class="container mx-auto my-8 px-4 py-4 bg-red-100 text-red-600 rounded-lg border border-red-600 text-center"
+  >
+    {{ error }}
+  </div>
+  
